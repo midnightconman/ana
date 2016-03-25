@@ -1,6 +1,5 @@
-/**
- * 
- * ana - Anagram compare two char arrays in C
+/*
+ * ana - Anagram : compare two char arrays in C
  *
  * Copyright (C) 2016 Jon Campbell - https://github.com/midnightconman/
  *
@@ -24,71 +23,18 @@
  * 
  */
 
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <check.h>
-#include "../src/ana.h"
 
-START_TEST (test_true) {
+#include "ana.h"
 
-  char *str1 = malloc(strlen("apple"));
-  char *str2 = malloc(strlen("apple"));
-  strcpy(str1, "apple");
-  strcpy(str2, "apple");
+int main(int argc, char **argv) {
 
-  ck_assert_int_eq(anagram(str1, str2), 0);
+  if (argc < 3) {
+    usage();
+    exit(1);
+  }
 
-  free (str1);
-  free (str2);
+  int result = anagram(argv[1], argv[2]);
 
-}
-END_TEST
-
-START_TEST (test_false) {
-
-  char *str1 = malloc(strlen("apple"));
-  char *str2 = malloc(strlen("bananna"));
-  strcpy(str1, "apple");
-  strcpy(str2, "bananna");
-
-  ck_assert_int_ne(anagram(str1, str2), 0);
-
-  free (str1);
-  free (str2);
-
-}
-END_TEST
-
-Suite * ana_suite(void) {
-    Suite *s;
-    TCase *tc_core;
-
-    s = suite_create("Ana");
-
-    /* Core test case */
-    tc_core = tcase_create("Core");
-
-    tcase_add_test(tc_core, test_true);
-    tcase_add_test(tc_core, test_false);
-    suite_add_tcase(s, tc_core);
-
-    return s;
-}
-
-int main(void) {
-
-  int number_failed;
-  Suite *s;
-  SRunner *sr;
-
-  s = ana_suite();
-  sr = srunner_create(s);
-
-  srunner_run_all(sr, CK_NORMAL);
-  number_failed = srunner_ntests_failed(sr);
-  srunner_free(sr);
-
-  return (number_failed == 0) ? EXIT_SUCCESS : EXIT_FAILURE;
-
+  exit(result);
 }

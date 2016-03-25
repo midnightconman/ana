@@ -1,13 +1,13 @@
 CC = gcc
 OBJ = ana.o
 
-all: test program
+all: tests program
 
 clean:
-	rm -rf ana
+	rm -rf ana testana
 
-test:
-	$(CC) test/test.c -o testana
+tests:
+	$(CC) test/test.c src/ana.c -lcheck -o testana
 
 program:
-	$(CC) src/ana.c -o ana 
+	$(CC) src/ana.c src/main.c -o ana 

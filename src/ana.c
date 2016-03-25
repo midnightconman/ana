@@ -45,15 +45,3 @@ int anagram(char *str1, char* str2) {
   return (strcmp(str1,str2) != 0) ? 1 : 0;
 
 }
-
-int main(int argc, char **argv) {
-
-  if (argc < 3) {
-    usage();
-    exit(1);
-  }
-
-  int result = anagram(argv[1], argv[2]);
-
-  exit(result);
-}
